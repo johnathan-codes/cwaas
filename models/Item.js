@@ -11,6 +11,12 @@ const ItemSchema = new Schema({
     type: String,
     default: '5'
   },
+  description: {
+    type: String,
+  },
+  newEpisode: {
+    type: String
+  },
   date: {
     type: Date,
     default: Date.now

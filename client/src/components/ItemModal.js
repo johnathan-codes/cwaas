@@ -17,7 +17,9 @@ class ItemModal extends Component {
   state = {
     modal: false,
     name: '',
-    rating: ''
+    rating: '',
+    description: '',
+    newEpisode: ''
   };
 
   static propTypes = {
@@ -38,7 +40,9 @@ class ItemModal extends Component {
     e.preventDefault();
     const newItem = {
       name: this.state.name,
-      rating: this.state.rating
+      rating: this.state.rating,
+      description: this.state.description,
+      newEpisode: this.state.newEpisode
     };
 
     this.props.addItem(newItem);
@@ -78,6 +82,20 @@ class ItemModal extends Component {
                   name='rating'
                   id='rating'
                   placeholder='Rating'
+                  onChange={this.onChange}
+                />
+                <Input
+                  type='text'
+                  name='description'
+                  id='description'
+                  placeholder='Description'
+                  onChange={this.onChange}
+                />
+                <Input
+                  type='text'
+                  name='newEpisode'
+                  id='newEpisode'
+                  placeholder='New episode on (day)'
                   onChange={this.onChange}
                 />
                 <Button color='dark' style={{ marginTop: '2rem' }} block>

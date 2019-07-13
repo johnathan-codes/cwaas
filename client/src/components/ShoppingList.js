@@ -39,7 +39,7 @@ class ShoppingList extends Component {
                       &times;
                     </Button>
                   ) : null}
-                  {name} <Badge pill>{rating}</Badge>
+                  {name} <Badge pill>{rating}</Badge> {description} Airing on: {newEpisode}
                 </ListGroupItem>
               </CSSTransition>
             ))}
