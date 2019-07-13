@@ -37,7 +37,8 @@ class ItemModal extends Component {
   onSubmit = e => {
     e.preventDefault();
     const newItem = {
-      name: this.state.name
+      name: this.state.name,
+      rating: this.state.rating
     };
 
     this.props.addItem(newItem);
@@ -75,7 +76,7 @@ class ItemModal extends Component {
                 <Input
                   type='text'
                   name='rating'
-                  id='item'
+                  id='rating'
                   placeholder='Rating'
                   onChange={this.onChange}
                 />
