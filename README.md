@@ -1,7 +1,5 @@
-## Shopping List
+## Anime/TV Shows list
 App created with MERN stack.
-
-Following Traversy Media tut.
 
 Master branch is ready to be deployed to heroku app.
 
@@ -27,9 +25,7 @@ For [example](https://docs.atlas.mongodb.com/driver-connection/#connect-your-app
 Key: DB
 Value: `mongodb+srv://<user>:<password>@cluster0.mongodb.net/<nameofdatabase>?ssl=true&authSource=admin`
 
-If you are asked to type in a name of collection during creation of database, type in whatever you want ~~`shopping-list`. There is a bug if you do not type this. This bug is fixed in develop branch and will be merged into master in later commits.~~ 
-
-Bug was fixed :blush:
+If you are asked to type in a name of collection during creation of database, type in whatever you want.
 
 #### Heroku
 Open terminal
