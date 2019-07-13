@@ -29,6 +29,7 @@ class ShoppingList extends Component {
             {items.map(({ _id, name, rating, description, newEpisode }) => (
               <CSSTransition key={_id} timeout={500} classNames='fade'>
                 <ListGroupItem>
+                  <ListGroupItemHeading>
                   {this.props.isAuthenticated ? (
                     <Button
                       className='remove-btn'
@@ -39,9 +40,8 @@ class ShoppingList extends Component {
                       &times;
                     </Button>
                   ) : null}
-                  <ListGroupItemHeading>{name} <Badge pill>{rating}</Badge></ListGroupItemHeading>
-                  <ListGroupItemText>{description}</ListGroupItemText>
-                  <ListGroupItemText>Airing on: {newEpisode}</ListGroupItemText>
+                  {name} <Badge pill>{rating}</Badge></ListGroupItemHeading>
+                  <ListGroupItemText>{description} <br />Airing on: {newEpisode}</ListGroupItemText>
                 </ListGroupItem>
               </CSSTransition>
             ))}
