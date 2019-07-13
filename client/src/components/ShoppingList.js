@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, Button, Badge } from 'reactstrap';
+import { Container, ListGroup, ListGroupItem, Button, Badge, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/itemActions';
@@ -39,7 +39,9 @@ class ShoppingList extends Component {
                       &times;
                     </Button>
                   ) : null}
-                  {name} <Badge pill>{rating}</Badge> {description} Airing on: {newEpisode}
+                  <ListGroupItemHeading>{name} <Badge pill>{rating}</Badge></ListGroupItemHeading>
+                  <ListGroupItemText>{description}</ListGroupItemText>
+                  <ListGroupItemText>Airing on: {newEpisode}</ListGroupItemText>
                 </ListGroupItem>
               </CSSTransition>
             ))}
