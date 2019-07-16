@@ -42,7 +42,7 @@ class ShoppingList extends Component {
         <Select
           value={selectedOption}
           onChange={this.handleChange}
-          closeMenuOnSelect={false}
+          closeMenuOnSelect={true}
           components={animatedComponents}
           //isMulti
           options={daysOfWeek}
