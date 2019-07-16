@@ -5,6 +5,11 @@ import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+import { daysOfWeek } from './DaysOfWeek';
+const animatedComponents = makeAnimated();
+
 class ShoppingList extends Component {
   static propTypes = {
     getItems: PropTypes.func.isRequired,
@@ -24,6 +29,12 @@ class ShoppingList extends Component {
     const { items } = this.props.item;
     return (
       <Container>
+        <Select 
+          closeMenuOnSelect={false}
+          components={animatedComponents}
+          isMulti
+          options={daysOfWeek}
+        />
         <ListGroup>
           <TransitionGroup className='shopping-list'>
             {items.map(({ _id, name, rating, description, newEpisode }) => (
