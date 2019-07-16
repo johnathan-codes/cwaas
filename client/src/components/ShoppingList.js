@@ -11,6 +11,10 @@ import { daysOfWeek } from './DaysOfWeek';
 const animatedComponents = makeAnimated();
 
 class ShoppingList extends Component {
+  state = {
+    selectedOption: null
+  };
+
   static propTypes = {
     getItems: PropTypes.func.isRequired,
     item: PropTypes.object.isRequired,
@@ -21,18 +25,26 @@ class ShoppingList extends Component {
     this.props.getItems();
   }
 
+  handleChange = selectedOption => {
+    this.setState({ selectedOption});
+    console.log(`Option selected:`, selectedOption);
+  }
+
   onDeleteClick = id => {
     this.props.deleteItem(id);
   };
 
   render() {
+    const { selectedOption } = this.state;
     const { items } = this.props.item;
     return (
       <Container>
-        <Select 
+        <Select
+          value={selectedOption}
+          onChange={this.handleChange}
           closeMenuOnSelect={false}
           components={animatedComponents}
-          isMulti
+          //isMulti
           options={daysOfWeek}
         />
         <ListGroup>
