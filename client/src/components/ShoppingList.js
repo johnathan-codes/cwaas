@@ -12,7 +12,10 @@ const animatedComponents = makeAnimated();
 
 class ShoppingList extends Component {
   state = {
-    selectedOption: null
+    selectedOption: {
+      value: 'Monday', 
+      label: 'Monday'
+    }
   };
 
   static propTypes = {
@@ -27,7 +30,7 @@ class ShoppingList extends Component {
 
   handleChange = selectedOption => {
     this.setState({ selectedOption});
-    console.log(`Option selected:`, selectedOption);
+    console.log(`Option selected:`, selectedOption.value);
   }
 
   onDeleteClick = id => {
@@ -37,41 +40,79 @@ class ShoppingList extends Component {
   render() {
     const { selectedOption } = this.state;
     const { items } = this.props.item;
-    return (
-      <Container>
-        <Select
-          value={selectedOption}
-          onChange={this.handleChange}
-          closeMenuOnSelect={true}
-          components={animatedComponents}
-          //isMulti
-          options={daysOfWeek}
-        />
-        <ListGroup>
-          <TransitionGroup className='shopping-list'>
-            {items.map(({ _id, name, rating, description, newEpisode }) => (
-              <CSSTransition key={_id} timeout={500} classNames='fade'>
-                <ListGroupItem>
-                  <ListGroupItemHeading>
-                  {this.props.isAuthenticated ? (
-                    <Button
-                      className='remove-btn'
-                      color='danger'
-                      size='sm'
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      &times;
-                    </Button>
-                  ) : null}
-                  {name} <Badge pill>{rating}</Badge></ListGroupItemHeading>
-                  <ListGroupItemText>{description} <br />Airing on: {newEpisode}</ListGroupItemText>
-                </ListGroupItem>
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
-        </ListGroup>
-      </Container>
-    );
+    
+    if(items.length > 0 && selectedOption.value == 'All'){
+      return (
+        <Container>
+          <Select
+            value={selectedOption}
+            onChange={this.handleChange}
+            closeMenuOnSelect={true}
+            components={animatedComponents}
+            options={daysOfWeek}
+          />
+          <ListGroup>
+            <TransitionGroup className='shopping-list'>
+              {items.map(({ _id, name, rating, description, newEpisode }) => (
+                <CSSTransition key={_id} timeout={500} classNames='fade'>
+                  <ListGroupItem>
+                    <ListGroupItemHeading>
+                    {this.props.isAuthenticated ? (<Button className='remove-btn' color='danger' size='sm' onClick={this.onDeleteClick.bind(this, _id)}>&times;</Button>) : null}
+                    {name} <Badge pill>{rating}</Badge>
+                    </ListGroupItemHeading>
+                    <ListGroupItemText>{description}<br />Airing on: {newEpisode}</ListGroupItemText>
+                  </ListGroupItem>
+                </CSSTransition>
+              ))}
+            </TransitionGroup>
+          </ListGroup>
+        </Container>
+      );
+    }else{
+      return (
+        <Container>
+          <Select
+            value={selectedOption}
+            onChange={this.handleChange}
+            closeMenuOnSelect={true}
+            components={animatedComponents}
+            options={daysOfWeek}
+          />
+          <ListGroup>
+            <TransitionGroup className='shopping-list'>
+              {items.map(({ _id, name, rating, description, newEpisode }) => (
+                <CSSTransition key={_id} timeout={500} classNames='fade'>
+                {items.length > 0 ? (
+                  <div>
+                    {newEpisode == selectedOption.value ? (
+                      <ListGroupItem>
+                        <ListGroupItemHeading>
+                          {this.props.isAuthenticated ? (<Button className='remove-btn' color='danger' size='sm' onClick={this.onDeleteClick.bind(this, _id)}>&times;</Button>) : null}
+                          {name}<Badge pill>{rating}</Badge>
+                        </ListGroupItemHeading>
+                        <ListGroupItemText>{description} <br />Airing on: {newEpisode}</ListGroupItemText>
+                      </ListGroupItem>
+                    ): null
+                    }
+                    </div>
+                ): 
+                (
+                  <ListGroupItem>
+                    <ListGroupItemHeading>
+                    {this.props.isAuthenticated ? (<Button className='remove-btn' color='danger' size='sm' onClick={this.onDeleteClick.bind(this, _id)}>&times;</Button>) : null}
+                    {name} <Badge pill>{rating}</Badge>
+                    </ListGroupItemHeading>
+                    <ListGroupItemText>{description} <br />Airing on: {newEpisode}</ListGroupItemText>
+                  </ListGroupItem>
+                )
+                }
+                </CSSTransition>
+              ))}
+            </TransitionGroup>
+          </ListGroup>
+        </Container>
+      );
+    }
   }
 }
 
