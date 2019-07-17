@@ -7,15 +7,19 @@ const ItemSchema = new Schema({
     type: String,
     required: true
   },
-  rating:{
+  rating: {
     type: String,
     default: '5'
   },
   description: {
-    type: String,
+    type: String
   },
   newEpisode: {
     type: String
+  },
+  seenEpisodes: {
+    type: String,
+    default: '1'
   },
   date: {
     type: Date,

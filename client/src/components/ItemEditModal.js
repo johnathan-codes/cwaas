@@ -20,7 +20,8 @@ class ItemModal extends Component {
     name: '',
     rating: '',
     description: '',
-    newEpisode: ''
+    newEpisode: '',
+    seenEpisodes: ''
   };
 
   static propTypes = {
@@ -30,8 +31,14 @@ class ItemModal extends Component {
   async componentDidMount() {
     try {
       const updateItem = await axios(`/api/items/${this.props._id}`);
-      const { name, rating, description, newEpisode } = updateItem.data.item;
-      this.setState({ name, rating, description, newEpisode });
+      const {
+        name,
+        rating,
+        description,
+        newEpisode,
+        seenEpisodes
+      } = updateItem.data.item;
+      this.setState({ name, rating, description, newEpisode, seenEpisodes });
     } catch (err) {
       console.log(err);
     }
@@ -53,7 +60,8 @@ class ItemModal extends Component {
       name: this.state.name,
       rating: this.state.rating,
       description: this.state.description,
-      newEpisode: this.state.newEpisode
+      newEpisode: this.state.newEpisode,
+      seenEpisodes: this.state.seenEpisodes
     };
 
     this.props.addItem(newItem);
@@ -103,6 +111,13 @@ class ItemModal extends Component {
                   name='newEpisode'
                   id='newEpisode'
                   value={this.state.newEpisode}
+                  onChange={this.onChange}
+                />
+                <Input
+                  type='text'
+                  name='seenEpisodes'
+                  id='seenEpisodes'
+                  value={this.state.seenEpisodes}
                   onChange={this.onChange}
                 />
                 <Button color='primary' style={{ marginTop: '2rem' }} block>

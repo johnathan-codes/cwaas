@@ -13,6 +13,10 @@ class CustomListGroupItem extends Component {
     this.props.deleteItem(this.props._id);
   };
 
+  onClickAdd = seenEpisodes => {
+    console.log(seenEpisodes);
+  };
+
   render() {
     return (
       <ListGroupItem>
@@ -42,6 +46,9 @@ class CustomListGroupItem extends Component {
           {this.props.description}
           <br />
           Airing on: {this.props.newEpisode}
+          <br />
+          No. of watched episodes: {this.props.seenEpisodes}
+          <Badge />
         </ListGroupItemText>
       </ListGroupItem>
     );

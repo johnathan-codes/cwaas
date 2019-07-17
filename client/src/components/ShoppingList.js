@@ -30,7 +30,6 @@ class ShoppingList extends Component {
   }
   handleChange = selectedOption => {
     this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption.value);
   };
 
   render() {
@@ -49,19 +48,29 @@ class ShoppingList extends Component {
           />
           <ListGroup>
             <TransitionGroup className='shopping-list'>
-              {items.map(({ _id, name, rating, description, newEpisode }) => (
-                <CSSTransition key={_id} timeout={500} classNames='fade'>
-                  <CustomListGroupItem
-                    _id={_id}
-                    name={name}
-                    rating={rating}
-                    description={description}
-                    newEpisode={newEpisode}
-                    isAuthenticated={this.props.isAuthenticated}
-                    deleteItem={this.props.deleteItem}
-                  />
-                </CSSTransition>
-              ))}
+              {items.map(
+                ({
+                  _id,
+                  name,
+                  rating,
+                  description,
+                  newEpisode,
+                  seenEpisodes
+                }) => (
+                  <CSSTransition key={_id} timeout={500} classNames='fade'>
+                    <CustomListGroupItem
+                      _id={_id}
+                      name={name}
+                      rating={rating}
+                      description={description}
+                      newEpisode={newEpisode}
+                      seenEpisodes={seenEpisodes}
+                      isAuthenticated={this.props.isAuthenticated}
+                      deleteItem={this.props.deleteItem}
+                    />
+                  </CSSTransition>
+                )
+              )}
             </TransitionGroup>
           </ListGroup>
         </Container>
@@ -78,33 +87,46 @@ class ShoppingList extends Component {
           />
           <ListGroup>
             <TransitionGroup className='shopping-list'>
-              {items.map(({ _id, name, rating, description, newEpisode }) => (
-                <CSSTransition key={_id} timeout={500} classNames='fade'>
-                  {items.length > 0 ? (
-                    <div>
-                      {newEpisode === selectedOption.value ? (
-                        <CustomListGroupItem
-                          _id={_id}
-                          name={name}
-                          rating={rating}
-                          description={description}
-                          newEpisode={newEpisode}
-                          isAuthenticated={this.props.isAuthenticated}
-                        />
-                      ) : null}
-                    </div>
-                  ) : (
-                    <CustomListGroupItem
-                      _id={_id}
-                      name={name}
-                      rating={rating}
-                      description={description}
-                      newEpisode={newEpisode}
-                      isAuthenticated={this.props.isAuthenticated}
-                    />
-                  )}
-                </CSSTransition>
-              ))}
+              {items.map(
+                ({
+                  _id,
+                  name,
+                  rating,
+                  description,
+                  newEpisode,
+                  seenEpisodes
+                }) => (
+                  <CSSTransition key={_id} timeout={500} classNames='fade'>
+                    {items.length > 0 ? (
+                      <div>
+                        {newEpisode === selectedOption.value ? (
+                          <CustomListGroupItem
+                            _id={_id}
+                            name={name}
+                            rating={rating}
+                            description={description}
+                            newEpisode={newEpisode}
+                            seenEpisodes={seenEpisodes}
+                            isAuthenticated={this.props.isAuthenticated}
+                            deleteItem={this.props.deleteItem}
+                          />
+                        ) : null}
+                      </div>
+                    ) : (
+                      <CustomListGroupItem
+                        _id={_id}
+                        name={name}
+                        rating={rating}
+                        description={description}
+                        newEpisode={newEpisode}
+                        seenEpisodes={seenEpisodes}
+                        isAuthenticated={this.props.isAuthenticated}
+                        deleteItem={this.props.deleteItem}
+                      />
+                    )}
+                  </CSSTransition>
+                )
+              )}
             </TransitionGroup>
           </ListGroup>
         </Container>

@@ -33,7 +33,8 @@ router.post('/', auth, (req, res) => {
     name: req.body.name,
     rating: req.body.rating,
     description: req.body.description,
-    newEpisode: req.body.newEpisode
+    newEpisode: req.body.newEpisode,
+    seenEpisodes: req.body.seenEpisodes
   });
 
   newItem.save().then(item => res.json(item));

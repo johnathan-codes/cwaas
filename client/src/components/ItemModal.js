@@ -19,7 +19,8 @@ class ItemModal extends Component {
     name: '',
     rating: '',
     description: '',
-    newEpisode: ''
+    newEpisode: '',
+    seenEpisodes: ''
   };
 
   static propTypes = {
@@ -42,7 +43,8 @@ class ItemModal extends Component {
       name: this.state.name,
       rating: this.state.rating,
       description: this.state.description,
-      newEpisode: this.state.newEpisode
+      newEpisode: this.state.newEpisode,
+      seenEpisodes: this.state.seenEpisodes
     };
 
     this.props.addItem(newItem);
@@ -96,6 +98,13 @@ class ItemModal extends Component {
                   name='newEpisode'
                   id='newEpisode'
                   placeholder='New episode on (day)'
+                  onChange={this.onChange}
+                />
+                <Input
+                  type='text'
+                  name='seenEpisodes'
+                  id='seenEpisodes'
+                  placeholder='Episodes seen'
                   onChange={this.onChange}
                 />
                 <Button color='dark' style={{ marginTop: '2rem' }} block>
