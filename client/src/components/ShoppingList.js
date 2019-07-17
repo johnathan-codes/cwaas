@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  ListGroup,
-  ListGroupItem,
-  Button,
-  Badge,
-  ListGroupItemHeading,
-  ListGroupItemText
-} from 'reactstrap';
+import { Container, ListGroup } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
+import CustomListGroupItem from './CustomListGroupItem';
 
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -21,8 +14,8 @@ const animatedComponents = makeAnimated();
 class ShoppingList extends Component {
   state = {
     selectedOption: {
-      value: 'Monday',
-      label: 'Monday'
+      value: 'All',
+      label: 'All'
     }
   };
 
@@ -35,14 +28,9 @@ class ShoppingList extends Component {
   componentDidMount() {
     this.props.getItems();
   }
-
   handleChange = selectedOption => {
     this.setState({ selectedOption });
     console.log(`Option selected:`, selectedOption.value);
-  };
-
-  onDeleteClick = id => {
-    this.props.deleteItem(id);
   };
 
   render() {
@@ -63,26 +51,15 @@ class ShoppingList extends Component {
             <TransitionGroup className='shopping-list'>
               {items.map(({ _id, name, rating, description, newEpisode }) => (
                 <CSSTransition key={_id} timeout={500} classNames='fade'>
-                  <ListGroupItem>
-                    <ListGroupItemHeading>
-                      {this.props.isAuthenticated ? (
-                        <Button
-                          className='remove-btn'
-                          color='danger'
-                          size='sm'
-                          onClick={this.onDeleteClick.bind(this, _id)}
-                        >
-                          &times;
-                        </Button>
-                      ) : null}
-                      {name} <Badge pill>{rating}</Badge>
-                    </ListGroupItemHeading>
-                    <ListGroupItemText>
-                      {description}
-                      <br />
-                      Airing on: {newEpisode}
-                    </ListGroupItemText>
-                  </ListGroupItem>
+                  <CustomListGroupItem
+                    _id={_id}
+                    name={name}
+                    rating={rating}
+                    description={description}
+                    newEpisode={newEpisode}
+                    isAuthenticated={this.props.isAuthenticated}
+                    deleteItem={this.props.deleteItem}
+                  />
                 </CSSTransition>
               ))}
             </TransitionGroup>
@@ -106,48 +83,25 @@ class ShoppingList extends Component {
                   {items.length > 0 ? (
                     <div>
                       {newEpisode === selectedOption.value ? (
-                        <ListGroupItem>
-                          <ListGroupItemHeading>
-                            {this.props.isAuthenticated ? (
-                              <Button
-                                className='remove-btn'
-                                color='danger'
-                                size='sm'
-                                onClick={this.onDeleteClick.bind(this, _id)}
-                              >
-                                &times;
-                              </Button>
-                            ) : null}
-                            {name}
-                            <Badge pill>{rating}</Badge>
-                          </ListGroupItemHeading>
-                          <ListGroupItemText>
-                            {description} <br />
-                            Airing on: {newEpisode}
-                          </ListGroupItemText>
-                        </ListGroupItem>
+                        <CustomListGroupItem
+                          _id={_id}
+                          name={name}
+                          rating={rating}
+                          description={description}
+                          newEpisode={newEpisode}
+                          isAuthenticated={this.props.isAuthenticated}
+                        />
                       ) : null}
                     </div>
                   ) : (
-                    <ListGroupItem>
-                      <ListGroupItemHeading>
-                        {this.props.isAuthenticated ? (
-                          <Button
-                            className='remove-btn'
-                            color='danger'
-                            size='sm'
-                            onClick={this.onDeleteClick.bind(this, _id)}
-                          >
-                            &times;
-                          </Button>
-                        ) : null}
-                        {name} <Badge pill>{rating}</Badge>
-                      </ListGroupItemHeading>
-                      <ListGroupItemText>
-                        {description} <br />
-                        Airing on: {newEpisode}
-                      </ListGroupItemText>
-                    </ListGroupItem>
+                    <CustomListGroupItem
+                      _id={_id}
+                      name={name}
+                      rating={rating}
+                      description={description}
+                      newEpisode={newEpisode}
+                      isAuthenticated={this.props.isAuthenticated}
+                    />
                   )}
                 </CSSTransition>
               ))}

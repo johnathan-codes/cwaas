@@ -4,6 +4,18 @@ const auth = require('../../middleware/auth');
 // Item Model
 const Item = require('../../models/Item');
 
+// @route   GET /api/items/:id
+// @desc    Get a specific item
+// @access  Public
+router.get('/:id', async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.id);
+    res.send({ item });
+  } catch (err) {
+    res.status(404).send({ message: 'Item not found!' });
+  }
+});
+
 // @route   GET api/items
 // @desc    Get All Items
 // @access  Public
