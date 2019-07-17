@@ -36,4 +36,16 @@ router.delete('/:id', auth, (req, res) => {
     .catch(err => res.status(404).json({ success: false }));
 });
 
+// @route   PUT /api/users/:id
+// @desc    Update a user
+// @access  Public
+router.put('/:id', async (req, res) => {
+  try {
+    const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body);
+    res.send({ message: 'The item was updated' });
+  } catch (err) {
+    res.status(400).send({ error: err });
+  }
+});
+
 module.exports = router;
