@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
 // @access  Public
 router.get('/', (req, res) => {
   Item.find()
-    .sort({ date: -1 })
+    .sort({ name: 1 })
     .then(items => res.json(items));
 });
 

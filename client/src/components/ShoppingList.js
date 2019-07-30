@@ -46,6 +46,7 @@ class ShoppingList extends Component {
             components={animatedComponents}
             options={daysOfWeek}
           />
+          <div>No. of shows: {items.length}</div>
           <ListGroup>
             <TransitionGroup className='shopping-list'>
               {items.map(
@@ -85,6 +86,7 @@ class ShoppingList extends Component {
             components={animatedComponents}
             options={daysOfWeek}
           />
+          <div>No. of shows: {items.length}</div>
           <ListGroup>
             <TransitionGroup className='shopping-list'>
               {items.map(
