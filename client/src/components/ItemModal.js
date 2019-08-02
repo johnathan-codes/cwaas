@@ -57,57 +57,57 @@ class ItemModal extends Component {
       <div>
         {this.props.isAuthenticated ? (
           <Button
-            color='dark'
+            color="dark"
             style={{ marginBottom: '2rem' }}
             onClick={this.toggle}
           >
             Add Item
           </Button>
         ) : (
-          <h4 className='mb-3 ml-4'>Login to add/delete an item</h4>
+          <h4 className="mb-3 ml-4">Login to add/delete an item</h4>
         )}
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Add to list</ModalHeader>
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for='item'>Item</Label>
+                <Label for="item">Item</Label>
                 <Input
-                  type='text'
-                  name='name'
-                  id='item'
-                  placeholder='Anime'
+                  type="text"
+                  name="name"
+                  id="item"
+                  placeholder="Name of the show"
                   onChange={this.onChange}
                 />
                 <Input
-                  type='text'
-                  name='rating'
-                  id='rating'
-                  placeholder='Rating'
+                  type="text"
+                  name="rating"
+                  id="rating"
+                  placeholder="Rating"
                   onChange={this.onChange}
                 />
                 <Input
-                  type='text'
-                  name='description'
-                  id='description'
-                  placeholder='Description'
+                  type="text"
+                  name="description"
+                  id="description"
+                  placeholder="Description"
                   onChange={this.onChange}
                 />
                 <Input
-                  type='text'
-                  name='newEpisode'
-                  id='newEpisode'
-                  placeholder='New episode on (day)'
+                  type="text"
+                  name="newEpisode"
+                  id="newEpisode"
+                  placeholder="New episode on (day)"
                   onChange={this.onChange}
                 />
                 <Input
-                  type='text'
-                  name='seenEpisodes'
-                  id='seenEpisodes'
-                  placeholder='Episodes seen'
+                  type="text"
+                  name="seenEpisodes"
+                  id="seenEpisodes"
+                  placeholder="Episodes seen"
                   onChange={this.onChange}
                 />
-                <Button color='dark' style={{ marginTop: '2rem' }} block>
+                <Button color="dark" style={{ marginTop: '2rem' }} block>
                   Add
                 </Button>
               </FormGroup>
