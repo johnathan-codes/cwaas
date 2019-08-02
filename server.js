@@ -8,6 +8,7 @@ app.use(express.json());
 
 const db = process.env.DB;
 
+mongoose.set('useFindAndModify', false);
 mongoose
   .connect(db, { useNewUrlParser: true, useCreateIndex: true })
   .then(() => console.log('Database connection successful.'))

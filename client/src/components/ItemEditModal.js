@@ -10,7 +10,7 @@ import {
   Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addItem, deleteItem } from '../actions/itemActions';
+import { updateItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -56,7 +56,9 @@ class ItemModal extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const newItem = {
+
+    const id = this.props._id;
+    const item = {
       name: this.state.name,
       rating: this.state.rating,
       description: this.state.description,
@@ -64,8 +66,7 @@ class ItemModal extends Component {
       seenEpisodes: this.state.seenEpisodes
     };
 
-    this.props.addItem(newItem);
-    this.props.deleteItem(this.props._id);
+    this.props.updateItem(id, item);
     this.toggle();
   };
 
@@ -73,7 +74,7 @@ class ItemModal extends Component {
     return (
       <Fragment>
         {this.props.isAuthenticated ? (
-          <Button color='primary' onClick={this.toggle} size='sm'>
+          <Button color="primary" onClick={this.toggle} size="sm">
             Edit
           </Button>
         ) : (
@@ -84,43 +85,43 @@ class ItemModal extends Component {
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for='item'>Item</Label>
+                <Label for="item">Item</Label>
                 <Input
-                  type='text'
-                  name='name'
-                  id='item'
+                  type="text"
+                  name="name"
+                  id="item"
                   value={this.state.name}
                   onChange={this.onChange}
                 />
                 <Input
-                  type='text'
-                  name='rating'
-                  id='rating'
+                  type="text"
+                  name="rating"
+                  id="rating"
                   value={this.state.rating}
                   onChange={this.onChange}
                 />
                 <Input
-                  type='text'
-                  name='description'
-                  id='description'
+                  type="text"
+                  name="description"
+                  id="description"
                   value={this.state.description}
                   onChange={this.onChange}
                 />
                 <Input
-                  type='text'
-                  name='newEpisode'
-                  id='newEpisode'
+                  type="text"
+                  name="newEpisode"
+                  id="newEpisode"
                   value={this.state.newEpisode}
                   onChange={this.onChange}
                 />
                 <Input
-                  type='text'
-                  name='seenEpisodes'
-                  id='seenEpisodes'
+                  type="text"
+                  name="seenEpisodes"
+                  id="seenEpisodes"
                   value={this.state.seenEpisodes}
                   onChange={this.onChange}
                 />
-                <Button color='primary' style={{ marginTop: '2rem' }} block>
+                <Button color="primary" style={{ marginTop: '2rem' }} block>
                   Edit
                 </Button>
               </FormGroup>
@@ -139,5 +140,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addItem, deleteItem }
+  { updateItem }
 )(ItemModal);
