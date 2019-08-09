@@ -61,4 +61,4 @@ This will build an app on your acc.
 
 While in your heroku app dashboard click on `Open app`.
 
-Done! Now go! Prepare your shopping list for your next trip to the mall :blush:
+Done! Now go! Prepare your list of TV shows you are currently watching :blush:
