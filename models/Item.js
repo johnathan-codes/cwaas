@@ -8,7 +8,7 @@ const ItemSchema = new Schema({
     required: true
   },
   rating: {
-    type: String,
+    type: Number,
     default: '5'
   },
   description: {
@@ -18,7 +18,7 @@ const ItemSchema = new Schema({
     type: String
   },
   seenEpisodes: {
-    type: String,
+    type: Number,
     default: '1'
   },
   date: {

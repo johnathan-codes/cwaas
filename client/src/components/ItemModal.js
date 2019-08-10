@@ -80,14 +80,14 @@ class ItemModal extends Component {
                   onChange={this.onChange}
                 />
                 <Input
-                  type="text"
+                  type="number"
                   name="rating"
                   id="rating"
                   placeholder="Rating"
                   onChange={this.onChange}
                 />
                 <Input
-                  type="text"
+                  type="textarea"
                   name="description"
                   id="description"
                   placeholder="Description"
@@ -101,7 +101,7 @@ class ItemModal extends Component {
                   onChange={this.onChange}
                 />
                 <Input
-                  type="text"
+                  type="number"
                   name="seenEpisodes"
                   id="seenEpisodes"
                   placeholder="Episodes seen"

@@ -94,14 +94,14 @@ class ItemModal extends Component {
                   onChange={this.onChange}
                 />
                 <Input
-                  type="text"
+                  type="number"
                   name="rating"
                   id="rating"
                   value={this.state.rating}
                   onChange={this.onChange}
                 />
                 <Input
-                  type="text"
+                  type="textarea"
                   name="description"
                   id="description"
                   value={this.state.description}
@@ -115,7 +115,7 @@ class ItemModal extends Component {
                   onChange={this.onChange}
                 />
                 <Input
-                  type="text"
+                  type="number"
                   name="seenEpisodes"
                   id="seenEpisodes"
                   value={this.state.seenEpisodes}
