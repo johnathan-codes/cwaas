@@ -11,7 +11,7 @@ import makeAnimated from 'react-select/animated';
 import { daysOfWeek } from './DaysOfWeek';
 const animatedComponents = makeAnimated();
 
-class ShoppingList extends Component {
+class ItemsList extends Component {
   state = {
     selectedOption: {
       value: 'All',
@@ -48,7 +48,7 @@ class ShoppingList extends Component {
           />
           <div>No. of shows: {items.length}</div>
           <ListGroup>
-            <TransitionGroup className='shopping-list'>
+            <TransitionGroup className="items-list">
               {items.map(
                 ({
                   _id,
@@ -58,7 +58,7 @@ class ShoppingList extends Component {
                   newEpisode,
                   seenEpisodes
                 }) => (
-                  <CSSTransition key={_id} timeout={500} classNames='fade'>
+                  <CSSTransition key={_id} timeout={500} classNames="fade">
                     <CustomListGroupItem
                       _id={_id}
                       name={name}
@@ -88,7 +88,7 @@ class ShoppingList extends Component {
           />
           <div>No. of shows: {items.length}</div>
           <ListGroup>
-            <TransitionGroup className='shopping-list'>
+            <TransitionGroup className="items-list">
               {items.map(
                 ({
                   _id,
@@ -98,7 +98,7 @@ class ShoppingList extends Component {
                   newEpisode,
                   seenEpisodes
                 }) => (
-                  <CSSTransition key={_id} timeout={500} classNames='fade'>
+                  <CSSTransition key={_id} timeout={500} classNames="fade">
                     {items.length > 0 ? (
                       <div>
                         {newEpisode === selectedOption.value ? (
@@ -145,4 +145,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getItems, deleteItem }
-)(ShoppingList);
+)(ItemsList);

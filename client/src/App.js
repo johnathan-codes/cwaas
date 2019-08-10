@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AppNavbar from './components/AppNavbar';
-import ShoppingList from './components/ShoppingList';
+import ItemsList from './components/ItemsList';
 import ItemModal from './components/ItemModal';
 import { Container } from 'reactstrap';
 import { loadUser } from './actions/authActions';
@@ -19,11 +19,11 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className='App'>
+        <div className="App">
           <AppNavbar />
           <Container>
             <ItemModal />
-            <ShoppingList />
+            <ItemsList />
           </Container>
         </div>
       </Provider>
