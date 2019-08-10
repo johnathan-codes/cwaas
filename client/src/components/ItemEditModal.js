@@ -13,6 +13,10 @@ import { connect } from 'react-redux';
 import { updateItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+import { daysOfWeekOnly } from './DaysOfWeek';
+const animatedComponents = makeAnimated();
 
 class ItemModal extends Component {
   state = {
@@ -20,8 +24,11 @@ class ItemModal extends Component {
     name: '',
     rating: '',
     description: '',
-    newEpisode: '',
-    seenEpisodes: ''
+    seenEpisodes: '',
+    selectedOption: {
+      value: '',
+      label: ''
+    }
   };
 
   static propTypes = {
@@ -38,7 +45,16 @@ class ItemModal extends Component {
         newEpisode,
         seenEpisodes
       } = updateItem.data.item;
-      this.setState({ name, rating, description, newEpisode, seenEpisodes });
+      this.setState({
+        name: name,
+        rating: rating,
+        description: description,
+        selectedOption: {
+          value: newEpisode,
+          label: newEpisode
+        },
+        seenEpisodes: seenEpisodes
+      });
     } catch (err) {
       console.log(err);
     }
@@ -54,6 +70,10 @@ class ItemModal extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  onChangeSelect = selectedOption => {
+    this.setState({ selectedOption });
+  };
+
   onSubmit = e => {
     e.preventDefault();
 
@@ -62,7 +82,7 @@ class ItemModal extends Component {
       name: this.state.name,
       rating: this.state.rating,
       description: this.state.description,
-      newEpisode: this.state.newEpisode,
+      newEpisode: this.state.selectedOption.value,
       seenEpisodes: this.state.seenEpisodes
     };
 
@@ -107,12 +127,12 @@ class ItemModal extends Component {
                   value={this.state.description}
                   onChange={this.onChange}
                 />
-                <Input
-                  type="text"
-                  name="newEpisode"
-                  id="newEpisode"
-                  value={this.state.newEpisode}
-                  onChange={this.onChange}
+                <Select
+                  value={this.state.selectedOption}
+                  onChange={this.onChangeSelect}
+                  closeMenuOnSelect={true}
+                  components={animatedComponents}
+                  options={daysOfWeekOnly}
                 />
                 <Input
                   type="number"
