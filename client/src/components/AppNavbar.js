@@ -8,7 +8,6 @@ import {
   NavItem,
   Container
 } from 'reactstrap';
-import RegisterModal from './auth/RegisterModal';
 import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
 import { connect } from 'react-redux';
@@ -50,9 +49,7 @@ class AppNavbar extends Component {
         <NavItem>
           <LoginModal />
         </NavItem>
-        <NavItem>
-          <RegisterModal />
-        </NavItem>
+        <NavItem></NavItem>
       </Fragment>
     );
 
