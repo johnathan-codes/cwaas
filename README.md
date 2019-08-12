@@ -62,3 +62,8 @@ This will build an app on your acc.
 While in your heroku app dashboard click on `Open app`.
 
 Done! Now go! Prepare your list of TV shows you are currently watching :blush:
+
+### No-register
+
+If you want noone else editing your stuff, there is a master-noregister branch in which there is no registration option.
+Steps are the same :)
