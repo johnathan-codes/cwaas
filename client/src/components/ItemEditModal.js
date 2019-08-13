@@ -30,7 +30,8 @@ class ItemModal extends Component {
       value: '',
       label: ''
     },
-    alert: false
+    alertRating: false,
+    alertEpisodes: false
   };
 
   static propTypes = {
@@ -74,10 +75,20 @@ class ItemModal extends Component {
 
   onChangeValidate = e => {
     if (e.target.value > 10 || e.target.value < 1) {
-      this.setState({ alert: true });
+      this.setState({ alertRating: true });
       return;
-    } else if (this.state.alert) {
-      this.setState({ alert: false });
+    } else if (this.state.alertRating) {
+      this.setState({ alertRating: false });
+    }
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onChangeValidateEpisodes = e => {
+    if (e.target.value < 1) {
+      this.setState({ alertEpisodes: true });
+      return;
+    } else if (this.state.alertEpisodes) {
+      this.setState({ alertEpisodes: false });
     }
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -113,11 +124,8 @@ class ItemModal extends Component {
           <Fragment />
         )}
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Edit to list</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Edit item</ModalHeader>
           <ModalBody>
-            <Alert color="danger" isOpen={this.state.alert}>
-              Please choose value from 1 to 10!
-            </Alert>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
                 <Label for="item">Item</Label>
@@ -154,13 +162,19 @@ class ItemModal extends Component {
                   name="seenEpisodes"
                   id="seenEpisodes"
                   value={this.state.seenEpisodes}
-                  onChange={this.onChange}
+                  onChange={this.onChangeValidateEpisodes}
                 />
                 <Button color="primary" style={{ marginTop: '2rem' }} block>
                   Edit
                 </Button>
               </FormGroup>
             </Form>
+            <Alert color="danger" isOpen={this.state.alertRating}>
+              Rating value must be within 1-10!
+            </Alert>
+            <Alert color="danger" isOpen={this.state.alertEpisodes}>
+              How can you watch a negative number of episodes?
+            </Alert>
           </ModalBody>
         </Modal>
       </Fragment>

@@ -7,7 +7,8 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  Alert
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
@@ -27,7 +28,9 @@ class ItemModal extends Component {
     selectedOption: {
       value: '',
       label: ''
-    }
+    },
+    alertRating: false,
+    alertEpisodes: false
   };
 
   static propTypes = {
@@ -41,6 +44,26 @@ class ItemModal extends Component {
   };
 
   onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onChangeValidate = e => {
+    if (e.target.value > 10 || e.target.value < 1) {
+      this.setState({ alertRating: true });
+      return;
+    } else if (this.state.alertRating) {
+      this.setState({ alertRating: false });
+    }
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onChangeValidateEpisodes = e => {
+    if (e.target.value < 1) {
+      this.setState({ alertEpisodes: true });
+      return;
+    } else if (this.state.alertEpisodes) {
+      this.setState({ alertEpisodes: false });
+    }
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -95,7 +118,8 @@ class ItemModal extends Component {
                   name="rating"
                   id="rating"
                   placeholder="Rating"
-                  onChange={this.onChange}
+                  value={this.state.rating}
+                  onChange={this.onChangeValidate}
                 />
                 <Input
                   type="textarea"
@@ -116,13 +140,19 @@ class ItemModal extends Component {
                   name="seenEpisodes"
                   id="seenEpisodes"
                   placeholder="Episodes seen"
-                  onChange={this.onChange}
+                  onChange={this.onChangeValidateEpisodes}
                 />
                 <Button color="dark" style={{ marginTop: '2rem' }} block>
                   Add
                 </Button>
               </FormGroup>
             </Form>
+            <Alert color="danger" isOpen={this.state.alertRating}>
+              Rating value must be within 1-10!
+            </Alert>
+            <Alert color="danger" isOpen={this.state.alertEpisodes}>
+              How can you watch a negative number of episodes?
+            </Alert>
           </ModalBody>
         </Modal>
       </div>
