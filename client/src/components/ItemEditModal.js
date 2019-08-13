@@ -7,7 +7,8 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  Alert
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { updateItem } from '../actions/itemActions';
@@ -28,7 +29,8 @@ class ItemModal extends Component {
     selectedOption: {
       value: '',
       label: ''
-    }
+    },
+    alert: false
   };
 
   static propTypes = {
@@ -70,6 +72,16 @@ class ItemModal extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  onChangeValidate = e => {
+    if (e.target.value > 10 || e.target.value < 1) {
+      this.setState({ alert: true });
+      return;
+    } else if (this.state.alert) {
+      this.setState({ alert: false });
+    }
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   onChangeSelect = selectedOption => {
     this.setState({ selectedOption });
   };
@@ -103,6 +115,9 @@ class ItemModal extends Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Edit to list</ModalHeader>
           <ModalBody>
+            <Alert color="danger" isOpen={this.state.alert}>
+              Please choose value from 1 to 10!
+            </Alert>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
                 <Label for="item">Item</Label>
@@ -118,7 +133,7 @@ class ItemModal extends Component {
                   name="rating"
                   id="rating"
                   value={this.state.rating}
-                  onChange={this.onChange}
+                  onChange={this.onChangeValidate}
                 />
                 <Input
                   type="textarea"
