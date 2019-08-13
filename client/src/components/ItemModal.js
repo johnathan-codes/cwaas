@@ -58,7 +58,7 @@ class ItemModal extends Component {
   };
 
   onChangeValidateEpisodes = e => {
-    if (e.target.value < 1) {
+    if (e.target.value < 0) {
       this.setState({ alertEpisodes: true });
       return;
     } else if (this.state.alertEpisodes) {
@@ -140,6 +140,7 @@ class ItemModal extends Component {
                   name="seenEpisodes"
                   id="seenEpisodes"
                   placeholder="Episodes seen"
+                  value={this.state.seenEpisodes}
                   onChange={this.onChangeValidateEpisodes}
                 />
                 <Button color="dark" style={{ marginTop: '2rem' }} block>
