@@ -1,7 +1,7 @@
 ## Shows list
 
 App created with MERN stack.
-
+[Demo](https://cwass-demo.herokuapp.com/)
 Master branch is ready to be deployed to heroku app.
 
 ## Prerequisites
