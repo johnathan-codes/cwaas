@@ -65,5 +65,7 @@ Done! Now go! Prepare your list of TV shows you are currently watching :blush:
 
 ### No-register
 
-If you want noone else editing your stuff, there is a master-noregister branch in which there is no registration option.
-Steps are the same :)
+If you want noone else editing your stuff, there was a noregister branch in which there is no registration option,
+but I removed it.
+So if you do not want registration just check these two commits:
+[Removed Registration](https://github.com/OneManDevz/cwaas/commit/171722a681b76f8e68adbe0836f286bce055ff2b) and [Fixed noregister](https://github.com/OneManDevz/cwaas/commit/78f466bd844b55ce4f93591fc72e220759296d4a)
