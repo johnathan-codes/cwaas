@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import {
   ListGroupItem,
   Button,
@@ -8,51 +8,45 @@ import {
 } from 'reactstrap';
 import ItemEditModal from './ItemEditModal';
 
-class CustomListGroupItem extends Component {
-  onDeleteClick = id => {
-    this.props.deleteItem(this.props._id);
-  };
-
-  onClickAdd = seenEpisodes => {
-    console.log(seenEpisodes);
-  };
-
-  render() {
-    return (
-      <ListGroupItem>
-        <ListGroupItemHeading>
-          {this.props.isAuthenticated ? (
-            <Fragment>
-              <Button
-                className='remove-btn'
-                color='danger'
-                size='sm'
-                onClick={this.onDeleteClick.bind(this, this.props._id)}
-              >
-                &times;
-              </Button>
-              <ItemEditModal
-                _id={this.props._id}
-                name={this.props.name}
-                rating={this.props.rating}
-                description={this.props.description}
-                newEpisode={this.props.newEpisode}
-              />
-            </Fragment>
-          ) : null}
-          {this.props.name} <Badge pill>{this.props.rating}</Badge>
-        </ListGroupItemHeading>
-        <ListGroupItemText>
-          {this.props.description}
-          <br />
-          Airing on: {this.props.newEpisode}
-          <br />
-          No. of watched episodes: {this.props.seenEpisodes}
-          <Badge />
-        </ListGroupItemText>
-      </ListGroupItem>
-    );
+const CustomListGroupItem = ({ _id, isAuthenticated, rating, description, name, newEpisode, seenEpisodes, deleteItem }) => {
+  const handleDelete = () => {
+    deleteItem(_id)
   }
+
+  return (
+    <ListGroupItem>
+      <ListGroupItemHeading>
+        {isAuthenticated ? (
+          <Fragment>
+            <Button
+              className='remove-btn'
+              color='danger'
+              size='sm'
+              onClick={handleDelete}
+            >
+              &times;
+            </Button>
+            <ItemEditModal
+              _id={_id}
+              name={name}
+              rating={rating}
+              description={description}
+              newEpisode={newEpisode}
+            />
+          </Fragment>
+        ) : null}
+        {name} <Badge pill>{rating}</Badge>
+      </ListGroupItemHeading>
+      <ListGroupItemText>
+        {description}
+        <br />
+        Airing on: {newEpisode}
+        <br />
+        No. of watched episodes: {seenEpisodes}
+        <Badge />
+      </ListGroupItemText>
+    </ListGroupItem>
+  );
 }
 
 export default CustomListGroupItem;
