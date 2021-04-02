@@ -1,31 +1,31 @@
-const express = require('express');
-const router = express.Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const auth = require('../../middleware/auth');
+const express = require('express')
+const router = express.Router()
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const auth = require('../../middleware/auth')
 
 // User Model
-const User = require('../../models/User');
+const User = require('../../models/User')
 
 // @route   POST api/auth
 // @desc    Auth user
 // @access  Public
 router.post('/', (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body
 
   if (!email || !password) {
-    return res.status(400).json({ msg: 'Please enter all fields' });
+    return res.status(400).json({ msg: 'Please enter all fields' })
   }
 
-  User.findOne({ email }).then(user => {
+  User.findOne({ email }).then((user) => {
     if (!user) {
-      return res.status(400).json({ msg: 'User does not exists' });
+      return res.status(400).json({ msg: 'User does not exists' })
     }
 
     //validate password
-    bcrypt.compare(password, user.password).then(isMatch => {
+    bcrypt.compare(password, user.password).then((isMatch) => {
       if (!isMatch) {
-        return res.status(400).json({ msg: 'Invalid email or password!' });
+        return res.status(400).json({ msg: 'Invalid email or password!' })
       }
 
       jwt.sign(
@@ -34,21 +34,21 @@ router.post('/', (req, res) => {
         { expiresIn: 3600 }, //expires in seconds
         (err, token) => {
           if (err) {
-            throw err;
+            throw err
           }
           res.json({
             token,
             user: {
               id: user.id,
               name: user.name,
-              email: user.email
-            }
-          });
+              email: user.email,
+            },
+          })
         }
-      );
-    });
-  });
-});
+      )
+    })
+  })
+})
 
 // @route   GET api/auth/user
 // @desc    Get user data
@@ -56,6 +56,6 @@ router.post('/', (req, res) => {
 router.get('/user', auth, (req, res) => {
   User.findById(req.user.id)
     .select('-password')
-    .then(user => res.json(user));
-});
-module.exports = router;
+    .then((user) => res.json(user))
+})
+module.exports = router
